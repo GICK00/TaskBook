@@ -45,8 +45,12 @@ namespace TaskBook
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonOk.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonOk.FlatAppearance.BorderSize = 0;
+            this.buttonOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonOk.Location = new System.Drawing.Point(753, 440);
             this.buttonOk.Name = "buttonOk";
@@ -63,20 +67,24 @@ namespace TaskBook
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSQLReader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxSQLReader.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSQLReader.Location = new System.Drawing.Point(6, 88);
+            this.textBoxSQLReader.Location = new System.Drawing.Point(2, 88);
             this.textBoxSQLReader.Multiline = true;
             this.textBoxSQLReader.Name = "textBoxSQLReader";
             this.textBoxSQLReader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxSQLReader.Size = new System.Drawing.Size(823, 346);
+            this.textBoxSQLReader.Size = new System.Drawing.Size(833, 347);
             this.textBoxSQLReader.TabIndex = 1;
             // 
             // buttonExit
             // 
             this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExit.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonExit.FlatAppearance.BorderSize = 0;
+            this.buttonExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonExit.Location = new System.Drawing.Point(677, 440);
+            this.buttonExit.Location = new System.Drawing.Point(674, 440);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(73, 23);
             this.buttonExit.TabIndex = 2;
@@ -150,12 +158,12 @@ namespace TaskBook
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.textBoxSQLReader);
             this.Controls.Add(this.statusStrip1);
-            this.MinimizeBox = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(837, 488);
             this.Name = "FormRequest";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание SQL запрос";
+            this.TopMost = true;
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

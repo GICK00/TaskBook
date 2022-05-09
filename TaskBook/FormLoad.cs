@@ -12,12 +12,15 @@ namespace TaskBook
         public FormLoad(string sql, string type)
         {
             InitializeComponent();
+
+            this.label1.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+
             sqlLoad = sql;
             typeLoad = type;
             if (typeLoad == "res")
                 this.label1.Text = "Восстановление...";
             else if (typeLoad == "back")
-                this.label1.Text = "Создание резерной копии..."; 
+                this.label1.Text = "Создание резерной копии...";
         }
 
         private void FormLoad_Load(object sender, EventArgs e)
@@ -34,7 +37,11 @@ namespace TaskBook
                 {
                     try
                     {
-                        FormMain.connection.Open();
+                        using (SqlCommand sqlCommand = new SqlCommand("USE " + FormMain.connection.Database.ToString(), FormMain.connection))
+                        {
+                            FormMain.connection.Open();
+                            sqlCommand.ExecuteNonQuery();
+                        }
                         FormMain.SQLStat = true;
                     }
                     catch (Exception)
@@ -70,7 +77,7 @@ namespace TaskBook
                     }
                     finally
                     {
-                        FormMain.connection.Close();   
+                        FormMain.connection.Close();
                     }
                 });
                 progressBar.Value += 50;

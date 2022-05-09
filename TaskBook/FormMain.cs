@@ -1,59 +1,80 @@
-﻿using System;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
 using System.Windows.Forms;
-using MaterialSkin;
-using MaterialSkin.Controls;
+using System.Reflection;
 
 namespace TaskBook
 {
     public partial class FormMain : MaterialForm
-    {
-        public string ver = "Ver. Alpha 0.1.0 T_B";
+    {        
+        public static string path;
+        private static StreamReader streamReader;
+        public string connSrring;
+        public static SqlConnection connection;
 
-        public static SqlConnection connection = new SqlConnection(Properties.Settings.Default.connString);
-        readonly Interaction.InteractionData interactionData = new Interaction.InteractionData();
-        readonly Interaction.InteractionTool interactionTool = new Interaction.InteractionTool();
-        readonly WebClient client = new WebClient();
+        public static readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+        private readonly Interaction.InteractionData interactionData = new Interaction.InteractionData();
+        private readonly Interaction.InteractionTool interactionTool = new Interaction.InteractionTool();
+        private readonly WebClient client = new WebClient();
 
         public SaveFileDialog saveFileDialogBack = new SaveFileDialog();
         public OpenFileDialog openFileDialogSQL = new OpenFileDialog();
         public OpenFileDialog openFileDialogRes = new OpenFileDialog();
-        
-        public static bool SQLStat = true;
+
+        public static bool SQLStat = false;
+        public string ver = "Ver. Alpha 0.2.0 T_B";
 
         public FormMain()
         {
             Program.formMain = this;
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
 
-            saveFileDialogBack.FileName = "Travel_Company";
+            this.ButtonReconnectionBD.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonReload.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            foreach (var toolItem in toolStrip1.Items)
+                if (toolItem is ToolStripDropDownButton) (toolItem as ToolStripDropDownButton).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            foreach (var statusItem in statusStrip1.Items)
+                if (statusItem is ToolStripStatusLabel) (statusItem as ToolStripStatusLabel).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            foreach (var panel in panel1.Controls)
+                if (panel is Button) (panel as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBox.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBox1.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabControl1.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.panelBackround.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label30.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+
+            saveFileDialogBack.FileName = "TaskBook";
             saveFileDialogBack.DefaultExt = ".bak";
             saveFileDialogBack.Filter = "Bak files(*bak)|*bak";
-            
+
             openFileDialogSQL.Filter = "Sql files(*.sql)|*.sql| Text files(*.txt)|*.txt| All files(*.*)|*.*";
             openFileDialogRes.Filter = "Bak files(*bak)|*bak";
+
             UpdateApp();
-            DataTable();
+            Visibl();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            if (CheckConfig(null, null, null, null) != true) return;
             PanelLoad();
-            Visibl();
             if (Test() != true) return;
-            Reload(comboBox.Text);
-            toolStripStatusLabel2.Text = "Готово к работе";
         }
 
-        private void DataTable()
+        public void DataTable()
         {
             if (SQLStat != true) return;
             try
@@ -70,10 +91,12 @@ namespace TaskBook
                         foreach (DataRow row in dataTable.Rows)
                             names.Add(row["name"].ToString());
                         names.Remove("sysdiagrams");
+                        if (FormLogin.Login != "admin") 
+                            names.Remove("Autorization");
                         comboBox.DataSource = names;
                         dataReader.Close();
                     }
-		            connection.Close();
+                    connection.Close();
                 }
             }
             catch (Exception ex)
@@ -101,38 +124,58 @@ namespace TaskBook
             }
         }
 
-        private void Visibl()
+        public void Visibl()
         {
-            foreach (var ctrl in this.Controls)
+            foreach (var ctrl in panelDefault.Controls)
                 if (ctrl is Panel) (ctrl as Panel).Visible = false;
+            panelBackround.Visible = true;
             panelDefault.Visible = true;
             switch (comboBox.Text)
             {
-                case "Tourist":
-                    panelTourist.Visible = true;
+                case "Employee":
+                    panelEmployee.Visible = true;
                     break;
-                case "TourOperator":
-                    panelTourOperator.Visible = true;
+                case "Programmer":
+                    panelProgrammer.Visible = true;
                     break;
-                case "TravelAgency":
-                    panelTravelAgency.Visible = true;
+                case "Task":
+                    panelTask.Visible = true;
                     break;
-                case "Excursion":
-                    panelExcursion.Visible = true;
+                case "Departament":
+                    panelDepartament.Visible = true;
                     break;
-                case "Provides":
-                    panelProvides.Visible = true;
+                case "TaskDescription":
+                    panelTaskDescription.Visible = true;
                     break;
-                case "Service":
-                    panelService.Visible = true;
+                case "Employee_Task":
+                    panelEmployee_Task.Visible = true;
                     break;
-                case "Promotes":
-                    panelPromotes.Visible = true;
+                case "Task_Programmer":
+                    panelTask_Programmer.Visible = true;
                     break;
-                default:
+                case "Autorization":
+                    panelAutorization.Visible = true;
                     break;
             }
             toolStripStatusLabel2.Text = "Выбрана таблица " + comboBox.Text;
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e) => interactionData.Add(comboBox.Text);
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            if (Test() != true) return;
+            if (LoginGuest() != true) return;
+            FormDeletedAndSearch formDeletedAndSearch = new FormDeletedAndSearch("sea");
+            formDeletedAndSearch.ShowDialog();
+        }
+
+        private void buttonDeleted_Click(object sender, EventArgs e)
+        {
+            if (Test() != true) return;
+            if (LoginAdmin() != true) return;
+            FormDeletedAndSearch formDeletedAndSearch = new FormDeletedAndSearch("del");
+            formDeletedAndSearch.ShowDialog();
         }
 
         private void buttonReload_Click(object sender, EventArgs e)
@@ -142,86 +185,26 @@ namespace TaskBook
             Reload(comboBox.Text);
         }
 
-        private void buttonAddTourist_Click(object sender, EventArgs e) => interactionData.buttonAddTourist();
-
-        private void buttonSearchTourist_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM Tourist WHERE TOURIST_SURNAEM = @TOURIST_SURNAEM AND TOURIST_NAME = @TOURIST_NAME AND TOURIST_PATRONYMIC = @TOURIST_PATRONYMIC";
-            interactionData.Search(sql);
-        }
-
-        private void buttonAddExcursion_Click(object sender, EventArgs e) => interactionData.buttonAddExcursion();
-
-        private void buttonSearchExcursion_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM Excursion WHERE EXCURSION_NAME = @Name";
-            interactionData.Search(sql);
-        }
-
-        private void buttonAddTravelAgency_Click(object sender, EventArgs e) => interactionData.buttonAddTravelAgency();
-
-        private void buttonSearchTravelAgency_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM TravelAgency WHERE TRAVELAGENCY_NAME = @Name";
-            interactionData.Search(sql);
-        }
-
-        private void buttonAddlTourOperator_Click(object sender, EventArgs e) => interactionData.buttonAddlTourOperator();
-
-        private void buttonSearchTourOperator_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM TourOperator WHERE TOUROPERATOR_NAME = @Name";
-            interactionData.Search(sql);
-        }
-
-        private void buttonAddService_Click(object sender, EventArgs e) => interactionData.buttonAddService();
-
-        private void buttonSearchService_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM Service WHERE SERVICE_ID = @ID";
-            interactionData.Search(sql);               
-        }
-
-        private void buttonAddProvides_Click(object sender, EventArgs e) => interactionData.buttonAddProvides();
-
-        private void buttonSearchProvides_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM Provides WHERE PROVIDES_ID = @ID";
-            interactionData.Search(sql);
-        }
-
-        private void buttonAddPromotes_Click(object sender, EventArgs e) => interactionData.buttonAddPromotes();
-
-        private void buttonSearchPromotes_Click(object sender, EventArgs e)
-        {
-            const string sql = "SELECT * FROM Promotes WHERE PROMOTES_ID = @ID";
-            interactionData.Search(sql);
-        }
-
         private void buttonReconnection_Click(object sender, EventArgs e)
         {
+            if (CheckConfig(null, null, null, null) != true) return;
             PanelLoad();
             if (SQLStat != false)
             {
                 MessageBox.Show("Подключение к базе данных установленно", "Проверка подключения", MessageBoxButtons.OK);
-                DataTable();
-                Visibl();
-                Reload(comboBox.Text);
                 toolStripStatusLabel2.Text = "Готово к работе";
+                if (FormLogin.Login != null)
+                {
+                    DataTable();
+                    Visibl();
+                    Reload(comboBox.Text);
+                }
             }
             else
             {
                 toolStripStatusLabel2.Text = $"Ошибка подключения к базе данных!";
                 MessageBox.Show("Ошибка подключения к базе данных!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void buttonDeleted_Click(object sender, EventArgs e)
-        {
-            if (Test() != true) return;
-            if (LoginAdmin() != true) return;
-            FormDeleted formDeleted = new FormDeleted();
-            formDeleted.ShowDialog();
         }
 
         private void ButtonInfo_Click(object sender, EventArgs e)
@@ -255,9 +238,13 @@ namespace TaskBook
                 MessageBox.Show("Вы уже вошли в систему!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            FormLogin.Login = "guest";
+            FormLogin.Login = "user";
+            DataTable();
+            Visibl();
+            Reload(comboBox.Text);
             toolStripStatusLabel2.Text = "Выполнен вход под логином " + FormLogin.Login;
-            this.Text = "Туристическая компания - Гость";
+            this.Text = "Учёт задач штатного программиста - " + FormLogin.Login;
+            materialSkinManager.AddFormToManage(this);
         }
 
         private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -265,11 +252,21 @@ namespace TaskBook
             if (FormLogin.Login != null)
             {
                 FormLogin.Login = null;
+                this.Text = "Учёт задач штатного программиста";
+                materialSkinManager.AddFormToManage(this);
+                comboBox.DataSource = null;
+                Visibl();
+                dataGridView1.DataSource = null;
                 toolStripStatusLabel2.Text = "Произведен выход из системы";
-                this.Text = "Туристическая компания";
                 return;
             }
-            MessageBox.Show("Не выполнен вход в систему!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);   
+            MessageBox.Show("Не выполнен вход в систему!", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void toolStripButtonSettings_Click(object sender, EventArgs e)
+        {
+            FormSettings formSettings = new FormSettings();
+            formSettings.ShowDialog();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -278,7 +275,7 @@ namespace TaskBook
             if (result != DialogResult.Yes) e.Cancel = true;
         }
 
-        private void PanelLoad()
+        public static void PanelLoad()
         {
             FormLoad formLoad = new FormLoad(null, null);
             formLoad.progressBar.Value = 0;
@@ -289,7 +286,7 @@ namespace TaskBook
         {
             if (FormLogin.Login != null)
             {
-                if (FormLogin.Login == "guest") return true;
+                if (FormLogin.Login == "user") return true;
                 return true;
             }
             MessageBox.Show("Вы не вошли в систему!\r\nВойдите в систему во вкладке Пользователи.", "Ошибка входа", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -313,8 +310,8 @@ namespace TaskBook
             if (SQLStat != true)
             {
                 toolStripStatusLabel2.Text = $"Ошибка подключения к базе данных!";
-                MessageBox.Show("Ошибка подключения к базе данных!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                return false; 
+                MessageBox.Show("Ошибка подключения к базе данных!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
             return true;
         }
@@ -335,6 +332,32 @@ namespace TaskBook
                 connection.Close();
             }
             dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Index;
+        }
+
+        public bool CheckConfig(string arg1, string arg2, string arg3, string arg4)
+        {
+            path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location).ToString() + "\\config.ini";
+            if (File.Exists(path) != true)
+            {
+                MessageBox.Show("Файл конфигурации отсуствует! Будет создан новый файл шаблон в корне программы.", "Критическая ошибка конфигурации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                File.Create(path).Close();
+                File.WriteAllText(path, $"Data Source = {arg1};\r\nInitial Catalog = {arg2};\r\nIntegrated Security = {arg3};\r\nConnect Timeout = {arg4};");
+                streamReader = new StreamReader(path);
+                connSrring = streamReader.ReadToEnd();
+                streamReader.Close();
+                connection = new SqlConnection(connSrring);
+                toolStripStatusLabel2.Text = "Критическая ошибка конфигурации!";
+                return false;
+            }
+            else
+            {
+                streamReader = new StreamReader(path);
+                connSrring = streamReader.ReadToEnd();
+                streamReader.Close();
+                connection = new SqlConnection(connSrring);
+                toolStripStatusLabel2.Text = "Готово к работе";
+                return true;
+            }
         }
 
         private void UpdateApp()
@@ -358,16 +381,22 @@ namespace TaskBook
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                toolStripStatusLabel2.Text = $"Ошибка проверки обновлений! {ex.Message}";
             }
         }
 
         private void buttonClearStr_Click(object sender, EventArgs e)
         {
-            foreach (var con in this.Controls)
-                if (con is Panel) foreach (var pan in (con as Panel).Controls)
-                        if (pan is TextBox) (pan as TextBox).Clear();
+            foreach (var panelDefault in panelDefault.Controls)
+                if (panelDefault is Panel) foreach (var panData in (panelDefault as Panel).Controls)
+                        if (panData is Panel)
+                        {
+                            foreach (var panTextBox in (panData as Panel).Controls)
+                                if (panTextBox is TextBox) (panTextBox as TextBox).Clear();
+                        }
+                        else if (panData is ComboBox) (panData as ComboBox).Text = null;
         }
     }
 }

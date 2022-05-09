@@ -63,9 +63,19 @@ namespace TaskBook.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _3x {
+        internal static System.Drawing.Bitmap DJ {
             get {
-                object obj = ResourceManager.GetObject("_3x", resourceCulture);
+                object obj = ResourceManager.GetObject("DJ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Flopa {
+            get {
+                object obj = ResourceManager.GetObject("Flopa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +83,9 @@ namespace TaskBook.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        internal static System.Drawing.Icon _73e5080f0f3804cb9cf470a8ce895dac {
+        internal static System.Drawing.Icon Icon_128x128 {
             get {
-                object obj = ResourceManager.GetObject("_73e5080f0f3804cb9cf470a8ce895dac", resourceCulture);
+                object obj = ResourceManager.GetObject("Icon_128x128", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -83,20 +93,30 @@ namespace TaskBook.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Daft_Punk___Around_the_world__But_is_Big_Floppa_ {
+        internal static System.Drawing.Bitmap Kit {
             get {
-                object obj = ResourceManager.GetObject("Daft_Punk___Around_the_world__But_is_Big_Floppa_", resourceCulture);
+                object obj = ResourceManager.GetObject("Kit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap N2U_b_haa_Trim_копия {
+        internal static byte[] Roboto_Bold {
             get {
-                object obj = ResourceManager.GetObject("N2U_b_haa_Trim_копия", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("Roboto_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] Roboto_Regular {
+            get {
+                object obj = ResourceManager.GetObject("Roboto_Regular", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

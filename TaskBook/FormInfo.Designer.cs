@@ -27,6 +27,7 @@ namespace TaskBook
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInfo));
@@ -44,7 +45,7 @@ namespace TaskBook
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel1.Location = new System.Drawing.Point(232, 237);
+            this.linkLabel1.Location = new System.Drawing.Point(239, 188);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(114, 16);
             this.linkLabel1.TabIndex = 1;
@@ -57,7 +58,7 @@ namespace TaskBook
             this.linkLabel2.AutoSize = true;
             this.linkLabel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel2.Location = new System.Drawing.Point(391, 237);
+            this.linkLabel2.Location = new System.Drawing.Point(396, 188);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(159, 16);
             this.linkLabel2.TabIndex = 2;
@@ -70,7 +71,7 @@ namespace TaskBook
             this.linkLabel3.AutoSize = true;
             this.linkLabel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.linkLabel3.Location = new System.Drawing.Point(133, 288);
+            this.linkLabel3.Location = new System.Drawing.Point(138, 222);
             this.linkLabel3.Name = "linkLabel3";
             this.linkLabel3.Size = new System.Drawing.Size(226, 16);
             this.linkLabel3.TabIndex = 3;
@@ -90,20 +91,20 @@ namespace TaskBook
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox1.Location = new System.Drawing.Point(2, 67);
+            this.richTextBox1.Location = new System.Drawing.Point(6, 69);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(605, 277);
+            this.richTextBox1.Size = new System.Drawing.Size(604, 207);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Image = global::TaskBook.Properties.Resources._3x;
-            this.pictureBox1.Location = new System.Drawing.Point(431, 259);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(4, 260);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(161, 118);
+            this.pictureBox1.Size = new System.Drawing.Size(606, 137);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -113,18 +114,18 @@ namespace TaskBook
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
-            this.ClientSize = new System.Drawing.Size(605, 386);
+            this.ClientSize = new System.Drawing.Size(615, 400);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkLabel3);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.richTextBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(605, 386);
+            this.MaximumSize = new System.Drawing.Size(615, 400);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(605, 386);
+            this.MinimumSize = new System.Drawing.Size(615, 400);
             this.Name = "FormInfo";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "О приложении";
             this.TransparencyKey = System.Drawing.Color.PaleGreen;

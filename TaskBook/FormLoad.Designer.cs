@@ -30,6 +30,7 @@ namespace TaskBook
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLoad));
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -40,7 +41,7 @@ namespace TaskBook
             // progressBar
             // 
             this.progressBar.ForeColor = System.Drawing.Color.Chartreuse;
-            this.progressBar.Location = new System.Drawing.Point(11, 28);
+            this.progressBar.Location = new System.Drawing.Point(8, 28);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(271, 23);
             this.progressBar.TabIndex = 0;
@@ -49,7 +50,7 @@ namespace TaskBook
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 15);
             this.label1.TabIndex = 1;
@@ -57,7 +58,7 @@ namespace TaskBook
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::TaskBook.Properties.Resources.N2U_b_haa_Trim_копия;
+            this.pictureBox1.Image = global::TaskBook.Properties.Resources.Kit;
             this.pictureBox1.Location = new System.Drawing.Point(-2, 59);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(303, 134);
@@ -70,16 +71,22 @@ namespace TaskBook
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(291, 190);
+            this.ClientSize = new System.Drawing.Size(287, 186);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(287, 186);
+            this.MinimumSize = new System.Drawing.Size(287, 186);
             this.Name = "FormLoad";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Прогрес выполнения";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormLoad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

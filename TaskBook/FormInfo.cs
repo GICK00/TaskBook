@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using System.Windows.Forms;
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace TaskBook
 {
@@ -10,6 +10,8 @@ namespace TaskBook
         public FormInfo()
         {
             InitializeComponent();
+            richTextBox1.Font = new System.Drawing.Font(Program.RobotoRegular, 9.75F, System.Drawing.FontStyle.Regular);
+
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
