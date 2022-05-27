@@ -30,6 +30,7 @@ namespace TaskBook
         /// 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.panelEmployee = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -82,7 +83,7 @@ namespace TaskBook
             this.panel2.Location = new System.Drawing.Point(204, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(205, 24);
-            this.panel2.TabIndex = 51;
+            this.panel2.TabIndex = 2;
             // 
             // textBox1
             // 
@@ -91,7 +92,7 @@ namespace TaskBook
             this.textBox1.Location = new System.Drawing.Point(4, 5);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(199, 13);
-            this.textBox1.TabIndex = 50;
+            this.textBox1.TabIndex = 2;
             // 
             // panel1
             // 
@@ -100,7 +101,7 @@ namespace TaskBook
             this.panel1.Location = new System.Drawing.Point(3, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(195, 24);
-            this.panel1.TabIndex = 4;
+            this.panel1.TabIndex = 1;
             // 
             // label2
             // 
@@ -108,7 +109,7 @@ namespace TaskBook
             this.label2.Location = new System.Drawing.Point(3, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 1;
             this.label2.Text = "Data Source";
             // 
             // panel12
@@ -118,7 +119,7 @@ namespace TaskBook
             this.panel12.Location = new System.Drawing.Point(204, 94);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(205, 24);
-            this.panel12.TabIndex = 4;
+            this.panel12.TabIndex = 5;
             // 
             // textBox6
             // 
@@ -127,7 +128,7 @@ namespace TaskBook
             this.textBox6.Location = new System.Drawing.Point(4, 5);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(199, 13);
-            this.textBox6.TabIndex = 50;
+            this.textBox6.TabIndex = 5;
             // 
             // panel10
             // 
@@ -145,7 +146,7 @@ namespace TaskBook
             this.textBox5.Location = new System.Drawing.Point(4, 5);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(199, 13);
-            this.textBox5.TabIndex = 50;
+            this.textBox5.TabIndex = 4;
             // 
             // panel13
             // 
@@ -172,7 +173,7 @@ namespace TaskBook
             this.panel8.Location = new System.Drawing.Point(204, 34);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(205, 24);
-            this.panel8.TabIndex = 4;
+            this.panel8.TabIndex = 3;
             // 
             // textBox4
             // 
@@ -181,7 +182,7 @@ namespace TaskBook
             this.textBox4.Location = new System.Drawing.Point(4, 5);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(199, 13);
-            this.textBox4.TabIndex = 50;
+            this.textBox4.TabIndex = 3;
             // 
             // panel11
             // 
@@ -233,7 +234,7 @@ namespace TaskBook
             this.buttonSaves.Margin = new System.Windows.Forms.Padding(0);
             this.buttonSaves.Name = "buttonSaves";
             this.buttonSaves.Size = new System.Drawing.Size(84, 23);
-            this.buttonSaves.TabIndex = 48;
+            this.buttonSaves.TabIndex = 6;
             this.buttonSaves.Text = "Сохранить";
             this.buttonSaves.UseVisualStyleBackColor = false;
             this.buttonSaves.Click += new System.EventHandler(this.buttonSaves_Click);
@@ -246,6 +247,7 @@ namespace TaskBook
             this.ClientSize = new System.Drawing.Size(439, 230);
             this.Controls.Add(this.buttonSaves);
             this.Controls.Add(this.panelEmployee);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(439, 230);
             this.MinimizeBox = false;

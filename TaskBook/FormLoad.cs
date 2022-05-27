@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -7,20 +8,31 @@ namespace TaskBook
 {
     public partial class FormLoad : Form
     {
-        private readonly string sqlLoad;
-        private readonly string typeLoad;
+        private string sqlLoad;
+        private string typeLoad;
         public FormLoad(string sql, string type)
         {
             InitializeComponent();
 
-            this.label1.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    this.label1.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 
-            sqlLoad = sql;
-            typeLoad = type;
-            if (typeLoad == "res")
-                this.label1.Text = "Восстановление...";
-            else if (typeLoad == "back")
-                this.label1.Text = "Создание резерной копии...";
+                    sqlLoad = sql;
+                    typeLoad = type;
+                    if (typeLoad == "res")
+                        this.label1.Text = "Восстановление...";
+                    else if (typeLoad == "back")
+                        this.label1.Text = "Создание резерной копии...";
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
         }
 
         private void FormLoad_Load(object sender, EventArgs e)

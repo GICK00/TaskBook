@@ -2,6 +2,7 @@
 using MaterialSkin.Controls;
 using System;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TaskBook
@@ -13,18 +14,36 @@ namespace TaskBook
         {
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    var materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
 
-            foreach (var label in this.Controls)
-                if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            foreach (var panel in this.Controls)
-                if (panel is Panel) foreach (var label in (panel as Panel).Controls)
+                    foreach (var label in this.Controls)
                         if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            foreach (var button in this.Controls)
-                if (button is Button) (button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var panel in this.Controls)
+                        if (panel is Panel) 
+                            foreach (var label in (panel as Panel).Controls)
+                                if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var button in this.Controls)
+                        if (button is Button) (button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
+        }
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

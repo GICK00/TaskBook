@@ -3,6 +3,7 @@ using MaterialSkin.Controls;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 
 namespace TaskBook
@@ -13,10 +14,21 @@ namespace TaskBook
         {
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    var materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
         }
 
         private void FormSettings_Load(object sender, EventArgs e)

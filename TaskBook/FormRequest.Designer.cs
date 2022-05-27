@@ -51,7 +51,7 @@ namespace TaskBook
             this.buttonOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.buttonOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOk.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonOk.Location = new System.Drawing.Point(753, 440);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(80, 23);
@@ -66,7 +66,7 @@ namespace TaskBook
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSQLReader.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxSQLReader.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSQLReader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxSQLReader.Location = new System.Drawing.Point(2, 88);
             this.textBoxSQLReader.Multiline = true;
             this.textBoxSQLReader.Name = "textBoxSQLReader";
@@ -83,7 +83,7 @@ namespace TaskBook
             this.buttonExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.buttonExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExit.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonExit.Location = new System.Drawing.Point(674, 440);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(73, 23);
@@ -112,11 +112,11 @@ namespace TaskBook
             // toolStripButtonOpenSQL
             // 
             this.toolStripButtonOpenSQL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonOpenSQL.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripButtonOpenSQL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripButtonOpenSQL.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonOpenSQL.Image")));
             this.toolStripButtonOpenSQL.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonOpenSQL.Name = "toolStripButtonOpenSQL";
-            this.toolStripButtonOpenSQL.Size = new System.Drawing.Size(103, 22);
+            this.toolStripButtonOpenSQL.Size = new System.Drawing.Size(106, 22);
             this.toolStripButtonOpenSQL.Text = "Открыть запрос";
             this.toolStripButtonOpenSQL.Click += new System.EventHandler(this.toolStripButtonOpenSQL_Click);
             // 
@@ -136,14 +136,14 @@ namespace TaskBook
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(49, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(50, 17);
             this.toolStripStatusLabel1.Text = "Статус:";
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
@@ -164,6 +164,7 @@ namespace TaskBook
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Создание SQL запрос";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FormRequest_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

@@ -81,7 +81,6 @@ namespace TaskBook
             this.MaximumSize = new System.Drawing.Size(287, 186);
             this.MinimumSize = new System.Drawing.Size(287, 186);
             this.Name = "FormLoad";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

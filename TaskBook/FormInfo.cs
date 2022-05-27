@@ -1,6 +1,8 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TaskBook
@@ -10,13 +12,24 @@ namespace TaskBook
         public FormInfo()
         {
             InitializeComponent();
-            richTextBox1.Font = new System.Drawing.Font(Program.RobotoRegular, 9.75F, System.Drawing.FontStyle.Regular);
 
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
-            richTextBox1.Text += Program.formMain.ver;
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    var materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+                    this.richTextBox1.Font = new System.Drawing.Font(Program.RobotoRegular, 9.75F, System.Drawing.FontStyle.Regular);
+                    richTextBox1.Text += FormMain.ver;
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("https://t.me/gick85");

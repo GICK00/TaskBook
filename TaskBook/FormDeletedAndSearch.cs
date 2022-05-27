@@ -3,43 +3,67 @@ using MaterialSkin.Controls;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TaskBook
 {
     public partial class FormDeletedAndSearch : MaterialForm
     {
-        private readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        private readonly string type;
+        private MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+        private string type;
         public FormDeletedAndSearch(string t)
         {
-            type = t;
             InitializeComponent();
 
-            materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
-
-            foreach (var label in this.Controls)
-                if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            foreach (var panel in this.Controls)
-                if (panel is Panel) foreach (var label in (panel as Panel).Controls)
-                        if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            foreach (var button in this.Controls)
-                if (button is Button) (button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-
-            switch (type)
+            new Thread(() =>
             {
-                case "del":
-                    this.Text = "Удаление";
-                    label1.Text = "Укажите номер в таблицы для удаление данных.";
-                    break;
-                case "sea":
-                    this.Text = "Поиск";
-                    label1.Text = "Укажите данные для поиска.";
-                    break;
-            }
+                Action action = () =>
+                {
+                    materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+
+                    foreach (var label in this.Controls)
+                        if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var panel in this.Controls)
+                        if (panel is Panel) 
+                            foreach (var label in (panel as Panel).Controls)
+                                if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var button in this.Controls)
+                        if (button is Button) (button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
+
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    type = t;
+                    switch (type)
+                    {
+                        case "del":
+                            this.Text = "Удаление";
+                            label1.Text = "Укажите номер в таблицы для удаление данных.";
+                            break;
+                        case "sea":
+                            this.Text = "Поиск";
+                            label1.Text = "Укажите данные для поиска.";
+                            break;
+                    }
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
         }
 
         public void buttonOk_Click(object sender, EventArgs e)
@@ -89,10 +113,10 @@ namespace TaskBook
             switch (Program.formMain.comboBox.Text)
             {
                 case "Employee":
-                    sql = "SELECT * FROM Employee WHERE EMPLOYEE_SURNAME = @EMPLOYEE_SURNAME AND EMPLOYEE_NAME = @EMPLOYEE_NAME AND EMPLOYEE_PATRONYMIC = @EMPLOYEE_PATRONYMIC";
+                    sql = "SELECT * FROM Employee WHERE EMPLOYEE_SURNAME = @EMPLOYEE_SURNAME AND EMPLOYEE_NAME = @EMPLOYEE_NAME AND EMPLOYEE_PATRONYMIC = @EMPLOYEE_PATRONYMIC OR EMPLOYEE_PATRONYMIC IS NULL";
                     break;
                 case "Programmer":
-                    sql = "SELECT * FROM Programmer WHERE PROGRAMMER_SURNAME = @PROGRAMMER_SURNAME AND PROGRAMMER_NAME = @PROGRAMMER_NAME AND EMPLOYEE_PATRONYMIC = @EMPLOYEE_PATRONYMIC";
+                    sql = "SELECT * FROM Programmer WHERE PROGRAMMER_SURNAME = @PROGRAMMER_SURNAME AND PROGRAMMER_NAME = @PROGRAMMER_NAME AND PROGRAMMER_PATRONYMIC = @PROGRAMMER_PATRONYMIC OR PROGRAMMER_PATRONYMIC IS NULL";
                     break;
                 case "Task":
                     sql = "SELECT * FROM Task WHERE TASK_NAME = @Name";

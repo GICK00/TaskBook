@@ -5,14 +5,7 @@ namespace TaskBook.Interaction
 {
     class InteractionTool
     {
-        public void выполнитьЗапросToolStripMenuItem()
-        {
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginAdmin() != true) return;
-            FormRequest formRequest = new FormRequest();
-            formRequest.ShowDialog();  
-        }
-
+        // Очиста данных таблиц БД
         public void очиститьБазуДанныхToolStripMenuItem()
         {
             if (Program.formMain.Test() != true) return;
@@ -29,6 +22,7 @@ namespace TaskBook.Interaction
             Program.formMain.toolStripStatusLabel2.Text = "База данных очищенна";
         }
 
+        // Создание полной резервной копии БД
         public void создатьРезервнуюКопиюToolStripMenuItem()
         {
             if (Program.formMain.Test() != true) return;
@@ -41,6 +35,7 @@ namespace TaskBook.Interaction
             formLoad.ShowDialog();
         }
 
+        // Восстановление данных БД из резервной копии
         public void восстановитьБазуДанныхToolStripMenuItem()
         {
             if (Program.formMain.Test() != true) return;
