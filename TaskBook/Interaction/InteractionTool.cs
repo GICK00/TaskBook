@@ -5,46 +5,57 @@ namespace TaskBook.Interaction
 {
     class InteractionTool
     {
-        // Очиста данных таблиц БД
+        private readonly Services services = new Services();
+
+        // Очищает все таблицы БД от данных кроме таблицы Autorization (она необходима для авторизации в приложении). 
         public void очиститьБазуДанныхToolStripMenuItem()
         {
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginAdmin() != true) return;
+            if (services.Test() != true) 
+                return;
+            if (services.LoginAdmin() != true) 
+                return;
             DialogResult result = MessageBox.Show("Вы уверены, что хотите очистить базу данных?", "Удаление данных.", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) return;
+            if (result != DialogResult.Yes) 
+                return;
             using (SqlCommand sqlCommand = new SqlCommand("DeletedAll", FormMain.connection))
             {
                 FormMain.connection.Open();
                 sqlCommand.ExecuteNonQuery();
                 FormMain.connection.Close();
             }
-            Program.formMain.Reload(Program.formMain.comboBox.Text);
+            services.Reload(Program.formMain.comboBox.Text);
+            services.ClearStr();
             Program.formMain.toolStripStatusLabel2.Text = "База данных очищенна";
         }
 
-        // Создание полной резервной копии БД
+        // Создает полную резерную копию всей БД.
         public void создатьРезервнуюКопиюToolStripMenuItem()
         {
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginAdmin() != true) return;
-            if (Program.formMain.saveFileDialogBack.ShowDialog() == DialogResult.Cancel) return;
-            string path = Program.formMain.saveFileDialogBack.FileName;
+            if (services.Test() != true) 
+                return;
+            if (services.LoginAdmin() != true) 
+                return;
+            if (services.saveFileDialogBack.ShowDialog() == DialogResult.Cancel) 
+                return;
+            string path = services.saveFileDialogBack.FileName;
             string sql = @"BACKUP DATABASE[Travel_Company] TO DISK = N'" + path + "' WITH NOFORMAT, NOINIT, NAME = N'Travel_Company-Полная База данных Резервное копирование', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
             string res = "back";
             FormLoad formLoad = new FormLoad(sql, res);
             formLoad.ShowDialog();
         }
 
-        // Восстановление данных БД из резервной копии
+        // Восстанавливает БД из выбранной резервной копии.
         public void восстановитьБазуДанныхToolStripMenuItem()
         {
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginAdmin() != true) return;
+            if (services.Test() != true) 
+                return;
+            if (services.LoginAdmin() != true) 
+                return;
             DialogResult result = MessageBox.Show("Вы уверены, что хотите востановить базу данных?", "Восстановление базы данных.", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result != DialogResult.Yes) return;
 
-            if (Program.formMain.openFileDialogRes.ShowDialog() == DialogResult.Cancel) return;
-            string path = Program.formMain.openFileDialogRes.FileName;
+            if (services.openFileDialogRes.ShowDialog() == DialogResult.Cancel) return;
+            string path = services.openFileDialogRes.FileName;
             string sql = @"USE Master RESTORE DATABASE [Travel_Company] FROM  DISK = N'" + path + "' WITH REPLACE, FILE = 1,  NOUNLOAD,  STATS = 5";
             string res = "res";
             FormLoad formLoad = new FormLoad(sql, res);

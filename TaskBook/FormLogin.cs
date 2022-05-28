@@ -9,7 +9,10 @@ namespace TaskBook
 {
     public partial class FormLogin : MaterialForm
     {
+        private readonly Interaction.Services services = new Interaction.Services();
+
         public static string Login;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -62,9 +65,10 @@ namespace TaskBook
                     Autorization(sql);
                     if (Login != null)
                     {
-                        Program.formMain.DataTable();
-                        Program.formMain.Visibl();
-                        Program.formMain.Reload(Program.formMain.comboBox.Text);
+                        services.DataTable();
+                        Program.formMain.dataGridView1.Enabled = true;
+                        services.Visibl();
+                        services.Reload(Program.formMain.comboBox.Text);
 
                         Program.formMain.toolStripStatusLabel2.Text = "Произведен вход под логином " + textBox1.Text;
                         Program.formMain.Text = "Учёт задач штатного программиста - " + textBox1.Text;

@@ -4,6 +4,7 @@ using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Settings
@@ -18,15 +19,26 @@ namespace Settings
         {
             InitializeComponent();
 
-            MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
+            new Thread(() =>
+            {
+                Action action = () =>
+                {
+                    MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+                    materialSkinManager.AddFormToManage(this);
+                    materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+                    materialSkinManager.ColorScheme = new ColorScheme(Primary.Grey300, Primary.Grey900, Primary.Grey200, Accent.LightBlue200, TextShade.BLACK);
 
-            foreach (var Label in this.Controls)
-                if (Label is Label) (Label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            foreach (var Button in this.Controls)
-                if (Button is Button) (Button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var Label in this.Controls)
+                        if (Label is Label) (Label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                    foreach (var Button in this.Controls)
+                        if (Button is Button) (Button as Button).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                };
+
+                if (InvokeRequired)
+                    Invoke(action);
+                else
+                    action();
+            }).Start();
         }
 
         private void textBoxSourceDBmdf_Click(object sender, EventArgs e)
@@ -98,7 +110,7 @@ namespace Settings
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonApp_Click(object sender, EventArgs e)
         {
             try
             {

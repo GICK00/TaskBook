@@ -49,6 +49,7 @@ namespace TaskBook
             this.panel9 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.buttonSaves = new System.Windows.Forms.Button();
+            this.buttonSettingsExe = new System.Windows.Forms.Button();
             this.panelEmployee.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -239,12 +240,32 @@ namespace TaskBook
             this.buttonSaves.UseVisualStyleBackColor = false;
             this.buttonSaves.Click += new System.EventHandler(this.buttonSaves_Click);
             // 
+            // buttonSettingsExe
+            // 
+            this.buttonSettingsExe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSettingsExe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonSettingsExe.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonSettingsExe.FlatAppearance.BorderSize = 0;
+            this.buttonSettingsExe.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonSettingsExe.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonSettingsExe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSettingsExe.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSettingsExe.Location = new System.Drawing.Point(220, 198);
+            this.buttonSettingsExe.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonSettingsExe.Name = "buttonSettingsExe";
+            this.buttonSettingsExe.Size = new System.Drawing.Size(111, 23);
+            this.buttonSettingsExe.TabIndex = 7;
+            this.buttonSettingsExe.Text = "Настройки БД";
+            this.buttonSettingsExe.UseVisualStyleBackColor = false;
+            this.buttonSettingsExe.Click += new System.EventHandler(this.buttonSettingsExe_Click);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SkyBlue;
             this.ClientSize = new System.Drawing.Size(439, 230);
+            this.Controls.Add(this.buttonSettingsExe);
             this.Controls.Add(this.buttonSaves);
             this.Controls.Add(this.panelEmployee);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -298,5 +319,6 @@ namespace TaskBook
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonSaves;
+        private System.Windows.Forms.Button buttonSettingsExe;
     }
 }

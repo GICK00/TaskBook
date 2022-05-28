@@ -43,7 +43,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.textBoxSourceDBldf = new System.Windows.Forms.TextBox();
             this.buttonDetech = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonApp = new System.Windows.Forms.Button();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -216,31 +216,31 @@
             this.buttonDetech.UseVisualStyleBackColor = false;
             this.buttonDetech.Click += new System.EventHandler(this.buttonDetech_Click);
             // 
-            // button1
+            // buttonApp
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(248, 217);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 23);
-            this.button1.TabIndex = 60;
-            this.button1.Text = "Открыть SQL";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonApp.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonApp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonApp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonApp.FlatAppearance.BorderSize = 0;
+            this.buttonApp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonApp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonApp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonApp.Location = new System.Drawing.Point(248, 217);
+            this.buttonApp.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonApp.Name = "buttonApp";
+            this.buttonApp.Size = new System.Drawing.Size(107, 23);
+            this.buttonApp.TabIndex = 60;
+            this.buttonApp.Text = "Открыть SQL";
+            this.buttonApp.UseVisualStyleBackColor = false;
+            this.buttonApp.Click += new System.EventHandler(this.buttonApp_Click);
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 253);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonApp);
             this.Controls.Add(this.buttonDetech);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel4);
@@ -287,7 +287,7 @@
         private System.Windows.Forms.Panel panel4;
         public System.Windows.Forms.TextBox textBoxSourceDBldf;
         private System.Windows.Forms.Button buttonDetech;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonApp;
     }
 }
 

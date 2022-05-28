@@ -11,7 +11,10 @@ namespace TaskBook
     public partial class FormDeletedAndSearch : MaterialForm
     {
         private MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
+        private readonly Interaction.Services services = new Interaction.Services();
+        private readonly Interaction.InteractionData interactionData = new Interaction.InteractionData();
         private string type;
+
         public FormDeletedAndSearch(string t)
         {
             InitializeComponent();
@@ -71,39 +74,11 @@ namespace TaskBook
             switch (type)
             {
                 case "del":
-                    Deleted();
+                    interactionData.Deleted(this, textBox1);
                     break;
                 case "sea":
                     Search();
                     break;
-            }
-        }
-
-        private void Deleted()
-        {
-            try
-            {
-                FormMain.connection.Open();
-                string sql = "DELETE FROM " + Program.formMain.comboBox.Text + " WHERE " + Program.formMain.comboBox.Text.ToUpper() + "_ID = @ID";
-                using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
-                {
-                    sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int));
-                    sqlCommand.Parameters["@ID"].Value = Convert.ToInt32(this.textBox1.Text);
-
-                    sqlCommand.ExecuteNonQuery();
-                }
-                Program.formMain.toolStripStatusLabel2.Text = "Данные удалены из таблицы " + Program.formMain.comboBox.Text;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка! {ex.Message}";
-            }
-            finally
-            {
-                FormMain.connection.Close();
-                Program.formMain.Reload(Program.formMain.comboBox.Text);
             }
         }
 
@@ -137,7 +112,6 @@ namespace TaskBook
                     sql = "SELECT * FROM Autorization WHERE LOGIN = @Name";
                     break;
             }
-            Interaction.InteractionData interactionData = new Interaction.InteractionData();
             interactionData.Search(sql, textBox1, out bool res);
             if (res == true) this.Close();
         }

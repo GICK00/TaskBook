@@ -1968,15 +1968,15 @@ namespace TaskBook
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         public System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Panel panelBackround;
+        public System.Windows.Forms.Panel panelBackround;
         private System.Windows.Forms.Button buttonReload;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.ComboBox comboBox;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Panel panelDefault;
+        public System.Windows.Forms.Panel panelDefault;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-        private System.Windows.Forms.Panel panelEmployee;
+        public System.Windows.Forms.Panel panelEmployee;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
@@ -2002,7 +2002,7 @@ namespace TaskBook
         private System.Windows.Forms.Button buttonClearStr;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panelDepartament;
+        public System.Windows.Forms.Panel panelDepartament;
         private System.Windows.Forms.Panel panel6;
         public System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Panel panel16;
@@ -2015,7 +2015,7 @@ namespace TaskBook
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel20;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Panel panelProgrammer;
+        public System.Windows.Forms.Panel panelProgrammer;
         private System.Windows.Forms.Panel panel4;
         public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Panel panel7;
@@ -2032,7 +2032,7 @@ namespace TaskBook
         public System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.Panel panel28;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Panel panelTask;
+        public System.Windows.Forms.Panel panelTask;
         private System.Windows.Forms.Panel panel33;
         public System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.Panel panel24;
@@ -2053,7 +2053,7 @@ namespace TaskBook
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel panel32;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Panel panelEmployee_Task;
+        public System.Windows.Forms.Panel panelEmployee_Task;
         private System.Windows.Forms.Panel panel42;
         public System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.Panel panel47;
@@ -2062,7 +2062,7 @@ namespace TaskBook
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Panel panel52;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Panel panelTask_Programmer;
+        public System.Windows.Forms.Panel panelTask_Programmer;
         private System.Windows.Forms.Panel panel39;
         public System.Windows.Forms.TextBox textBox19;
         private System.Windows.Forms.Panel panel40;
@@ -2071,7 +2071,7 @@ namespace TaskBook
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Panel panel43;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Panel panelAutorization;
+        public System.Windows.Forms.Panel panelAutorization;
         private System.Windows.Forms.Panel panel44;
         public System.Windows.Forms.TextBox textBox21;
         private System.Windows.Forms.Panel panel45;

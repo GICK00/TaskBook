@@ -10,6 +10,8 @@ namespace TaskBook
 {
     public partial class FormRequest : MaterialForm
     {
+        private readonly Interaction.Services services = new Interaction.Services();
+
         public FormRequest()
         {
             InitializeComponent();
@@ -39,11 +41,11 @@ namespace TaskBook
 
         private void toolStripButtonOpenSQL_Click(object sender, EventArgs e)
         {
-            if (Program.formMain.openFileDialogSQL.ShowDialog() == DialogResult.Cancel) 
+            if (services.openFileDialogSQL.ShowDialog() == DialogResult.Cancel) 
                 return;
             try
             {
-                string filename = Program.formMain.openFileDialogSQL.FileName;
+                string filename = services.openFileDialogSQL.FileName;
                 string sql = System.IO.File.ReadAllText(filename, Encoding.GetEncoding(1251));
                 textBoxSQLReader.Text = sql;
             }
@@ -78,7 +80,7 @@ namespace TaskBook
             finally
             {
                 FormMain.connection.Close();
-                Program.formMain.Reload(Program.formMain.comboBox.Text);
+                services.Reload(Program.formMain.comboBox.Text);
             }
         }
 

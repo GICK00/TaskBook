@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="Interaction\InteractionData.cs" />
     <Compile Include="Interaction\InteractionTool.cs" />
+    <Compile Include="Interaction\Services.cs" />
     <Compile Include="Program.cs" />
     <EmbeddedResource Include="FormDeletedAndSearch.resx">
       <DependentUpon>FormDeletedAndSearch.cs</DependentUpon>

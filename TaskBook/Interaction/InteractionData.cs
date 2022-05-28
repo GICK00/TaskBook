@@ -7,14 +7,18 @@ namespace TaskBook.Interaction
 {
     class InteractionData
     {
-        // Добавления и изменение данных в выбранную таблицу
+        private readonly Services services = new Services();
+
+        // Добавляет данные или изменяет данные в выбранной таблице.
         public void AddAndUpdate(string action)
         {
             string[] array = null;
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginAdmin() != true) return;
-            if (action == "Update" && FormMain.flag == true)
-                array = Program.formMain.ArrayUpdate();
+            if (services.Test() != true) 
+                return;
+            if (services.LoginAdmin() != true) 
+                return;
+            if (action == "Update" && FormMain.flagUpdate == true)
+                array = services.ArrayUpdate();
             else if (action == "Update")
             {
                 MessageBox.Show("Выберите обьект изменения", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -34,8 +38,7 @@ namespace TaskBook.Interaction
                             if (EmployeeFIO.Length < 2 || Program.formMain.textBox4.Text.Length == 0 || Program.formMain.textBox5.Text.Length == 0 || Program.formMain.textBox6.Text.Length == 0 || Program.formMain.textBox7.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -76,8 +79,7 @@ namespace TaskBook.Interaction
                             if (ProgrammerFIO.Length < 2 || Program.formMain.textBox11.Text.Length == 0 || Program.formMain.textBox10.Text.Length == 0 || Program.formMain.textBox2.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -113,8 +115,7 @@ namespace TaskBook.Interaction
                             if (Program.formMain.textBox15.Text.Length == 0 || Program.formMain.textBox14.Text.Length == 0 || Program.formMain.textBox17.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -152,8 +153,7 @@ namespace TaskBook.Interaction
                             if (Program.formMain.textBox9.Text.Length == 0 || Program.formMain.textBox8.Text.Length == 0 || Program.formMain.textBox3.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -177,8 +177,7 @@ namespace TaskBook.Interaction
                             if (Program.formMain.textBox25.Text.Length == 0 || Program.formMain.textBox22.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -199,8 +198,7 @@ namespace TaskBook.Interaction
                             if (Program.formMain.textBox20.Text.Length == 0 || Program.formMain.textBox19.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -221,8 +219,7 @@ namespace TaskBook.Interaction
                             if (Program.formMain.textBox23.Text.Length == 0 || Program.formMain.textBox21.Text.Length == 0)
                             {
                                 MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка введенных данных!";
-                                return;
+                                throw new Exception("Ошибка введенных данных!");
                             }
                             else
                             {
@@ -244,15 +241,21 @@ namespace TaskBook.Interaction
                             break;
                     }
                     sqlCommand.ExecuteNonQuery();
+                    FormMain.connection.Close();
+
+                    int index = FormMain.n;
+                    services.Reload(Program.formMain.comboBox.Text);
                     if (action == "Update")
                     {
                         Program.formMain.toolStripStatusLabel2.Text = "Данные изменены";
-                        FormMain.flag = false;
+
+                        // Вызвращает указатель на выделенное поля которые было воделлено пользователем до изменения.
+                        FormMain.flagUpdate = false;
+                        Program.formMain.dataGridView1.FirstDisplayedScrollingRowIndex = index;
+                        Program.formMain.dataGridView1.Rows[index].Selected = true;
                     }
                     else
                         Program.formMain.toolStripStatusLabel2.Text = "Данные добавлены";
-                    FormMain.connection.Close();
-                    Program.formMain.Reload(Program.formMain.comboBox.Text);
                 }
             }
             catch (Exception ex)
@@ -266,8 +269,10 @@ namespace TaskBook.Interaction
         public void Search(string sql, TextBox textBox, out bool res)
         {
             res = false;
-            if (Program.formMain.Test() != true) return;
-            if (Program.formMain.LoginGuest() != true) return;
+            if (services.Test() != true) 
+                return;
+            if (services.LoginGuest() != true) 
+                return;
             using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
             {
                 try
@@ -359,6 +364,36 @@ namespace TaskBook.Interaction
                 {
                     FormMain.connection.Close();
                 }
+            }
+        }
+
+        // Удаление данных из таблиц БД по указанному ID в таблице (для всех таблиц одиноковое написание ..._ID).
+        public void Deleted(Form form, TextBox textBox)
+        {
+            try
+            {
+                FormMain.connection.Open();
+                string sql = "DELETE FROM " + Program.formMain.comboBox.Text + " WHERE " + Program.formMain.comboBox.Text.ToUpper() + "_ID = @ID";
+                using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
+                {
+                    sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int));
+                    sqlCommand.Parameters["@ID"].Value = Convert.ToInt32(textBox.Text);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+                Program.formMain.toolStripStatusLabel2.Text = "Данные удалены из таблицы " + Program.formMain.comboBox.Text;
+                form.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка! {ex.Message}";
+            }
+            finally
+            {
+                FormMain.connection.Close();
+                services.Reload(Program.formMain.comboBox.Text);
+
             }
         }
     }

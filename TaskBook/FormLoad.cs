@@ -8,8 +8,11 @@ namespace TaskBook
 {
     public partial class FormLoad : Form
     {
+        private readonly Interaction.Services services = new Interaction.Services();
+
         private string sqlLoad;
         private string typeLoad;
+
         public FormLoad(string sql, string type)
         {
             InitializeComponent();
@@ -26,6 +29,8 @@ namespace TaskBook
                         this.label1.Text = "Восстановление...";
                     else if (typeLoad == "back")
                         this.label1.Text = "Создание резерной копии...";
+                    else if (typeLoad == "update")
+                        this.label1.Text = "Проверка версии...";
                 };
 
                 if (InvokeRequired)
@@ -93,7 +98,7 @@ namespace TaskBook
                     }
                 });
                 progressBar.Value += 50;
-                Program.formMain.Reload(Program.formMain.comboBox.Text);
+                services.Reload(Program.formMain.comboBox.Text);
                 await Task.Delay(500);
             }
             else if (typeLoad == "back")
