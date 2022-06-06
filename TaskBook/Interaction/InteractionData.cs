@@ -13,9 +13,9 @@ namespace TaskBook.Interaction
         public void AddAndUpdate(string action)
         {
             string[] array = null;
-            if (services.Test() != true) 
+            if (services.Test() != true)
                 return;
-            if (services.LoginAdmin() != true) 
+            if (services.LoginAdmin() != true)
                 return;
             if (action == "Update" && FormMain.flagUpdate == true)
                 array = services.ArrayUpdate();
@@ -37,8 +37,8 @@ namespace TaskBook.Interaction
                             string[] EmployeeFIO = Program.formMain.textBox1.Text.Trim().Split();
                             if (EmployeeFIO.Length < 2 || Program.formMain.textBox4.Text.Length == 0 || Program.formMain.textBox5.Text.Length == 0 || Program.formMain.textBox6.Text.Length == 0 || Program.formMain.textBox7.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -78,8 +78,8 @@ namespace TaskBook.Interaction
 
                             if (ProgrammerFIO.Length < 2 || Program.formMain.textBox11.Text.Length == 0 || Program.formMain.textBox10.Text.Length == 0 || Program.formMain.textBox2.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -114,8 +114,8 @@ namespace TaskBook.Interaction
                         case "Task":
                             if (Program.formMain.textBox15.Text.Length == 0 || Program.formMain.textBox14.Text.Length == 0 || Program.formMain.textBox17.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -152,8 +152,8 @@ namespace TaskBook.Interaction
                         case "Departament":
                             if (Program.formMain.textBox9.Text.Length == 0 || Program.formMain.textBox8.Text.Length == 0 || Program.formMain.textBox3.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -176,8 +176,8 @@ namespace TaskBook.Interaction
                         case "Employee_Task":
                             if (Program.formMain.textBox25.Text.Length == 0 || Program.formMain.textBox22.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -197,8 +197,8 @@ namespace TaskBook.Interaction
                         case "Task_Programmer":
                             if (Program.formMain.textBox20.Text.Length == 0 || Program.formMain.textBox19.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -218,8 +218,8 @@ namespace TaskBook.Interaction
                         case "Autorization":
                             if (Program.formMain.textBox23.Text.Length == 0 || Program.formMain.textBox21.Text.Length == 0)
                             {
-                                MessageBox.Show("Ошибка введенных данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                throw new Exception("Ошибка введенных данных!");
+                                MessageBox.Show("Заполните все поля для ввода данных.", "Ошибка введенных данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                throw new Exception("Заполните все поля для ввода данных.");
                             }
                             else
                             {
@@ -269,9 +269,9 @@ namespace TaskBook.Interaction
         public void Search(string sql, TextBox textBox, out bool res)
         {
             res = false;
-            if (services.Test() != true) 
+            if (services.Test() != true)
                 return;
-            if (services.LoginGuest() != true) 
+            if (services.LoginGuest() != true)
                 return;
             using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
             {
@@ -280,7 +280,7 @@ namespace TaskBook.Interaction
                     switch (Program.formMain.comboBox.Text)
                     {
                         case "Employee":
-                            string[] EmployeeFIO= textBox.Text.Trim().Split();
+                            string[] EmployeeFIO = textBox.Text.Trim().Split();
 
                             sqlCommand.Parameters.Add(new SqlParameter("@EMPLOYEE_SURNAME", SqlDbType.NChar, 25));
                             sqlCommand.Parameters["@EMPLOYEE_SURNAME"].Value = EmployeeFIO[0];
@@ -373,7 +373,7 @@ namespace TaskBook.Interaction
             try
             {
                 FormMain.connection.Open();
-                string sql = "DELETE FROM " + Program.formMain.comboBox.Text + " WHERE " + Program.formMain.comboBox.Text.ToUpper() + "_ID = @ID";
+                string sql = $"DELETE FROM {Program.formMain.comboBox.Text} WHERE {Program.formMain.comboBox.Text.ToUpper()}_ID = @ID";
                 using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
                 {
                     sqlCommand.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int));
@@ -381,8 +381,8 @@ namespace TaskBook.Interaction
 
                     sqlCommand.ExecuteNonQuery();
                 }
-                Program.formMain.toolStripStatusLabel2.Text = "Данные удалены из таблицы " + Program.formMain.comboBox.Text;
-                form.Close();
+                Program.formMain.toolStripStatusLabel2.Text = $"Данные удалены из таблицы {Program.formMain.comboBox.Text}";
+                //form.Close();
             }
             catch (Exception ex)
             {
@@ -393,7 +393,6 @@ namespace TaskBook.Interaction
             {
                 FormMain.connection.Close();
                 services.Reload(Program.formMain.comboBox.Text);
-
             }
         }
     }

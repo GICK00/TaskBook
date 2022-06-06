@@ -63,7 +63,12 @@ namespace TaskBook
             this.comboBox = new System.Windows.Forms.ComboBox();
             this.buttonReload = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.checkBoxEnd = new System.Windows.Forms.CheckBox();
+            this.checkBoxStart = new System.Windows.Forms.CheckBox();
+            this.panel36 = new System.Windows.Forms.Panel();
+            this.textBox18 = new System.Windows.Forms.TextBox();
+            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
+            this.buttonFilter = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonUpdate = new System.Windows.Forms.Button();
@@ -186,6 +191,7 @@ namespace TaskBook
             this.panelBackround.SuspendLayout();
             this.panel54.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel36.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelDefault.SuspendLayout();
             this.panelTask.SuspendLayout();
@@ -522,8 +528,7 @@ namespace TaskBook
             // 
             // panelBackround
             // 
-            this.panelBackround.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelBackround.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panelBackround.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panelBackround.Controls.Add(this.panel54);
             this.panelBackround.Controls.Add(this.panel3);
@@ -533,20 +538,19 @@ namespace TaskBook
             this.panelBackround.Location = new System.Drawing.Point(773, 7);
             this.panelBackround.Margin = new System.Windows.Forms.Padding(0);
             this.panelBackround.Name = "panelBackround";
-            this.panelBackround.Size = new System.Drawing.Size(422, 611);
+            this.panelBackround.Size = new System.Drawing.Size(422, 517);
             this.panelBackround.TabIndex = 49;
             this.panelBackround.Visible = false;
             // 
             // panel54
             // 
             this.panel54.BackColor = System.Drawing.Color.White;
-            this.panel54.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel54.Controls.Add(this.label7);
             this.panel54.Controls.Add(this.comboBox);
             this.panel54.Controls.Add(this.buttonReload);
-            this.panel54.Location = new System.Drawing.Point(0, 0);
+            this.panel54.Location = new System.Drawing.Point(2, 2);
             this.panel54.Name = "panel54";
-            this.panel54.Size = new System.Drawing.Size(422, 50);
+            this.panel54.Size = new System.Drawing.Size(418, 50);
             this.panel54.TabIndex = 62;
             // 
             // label7
@@ -587,44 +591,100 @@ namespace TaskBook
             this.buttonReload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonReload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReload.Location = new System.Drawing.Point(189, 20);
+            this.buttonReload.Location = new System.Drawing.Point(285, 19);
             this.buttonReload.Margin = new System.Windows.Forms.Padding(0);
             this.buttonReload.Name = "buttonReload";
             this.buttonReload.Size = new System.Drawing.Size(125, 23);
             this.buttonReload.TabIndex = 45;
-            this.buttonReload.Text = "Обновить таблицу";
+            this.buttonReload.Text = "Сбросить таблицу";
             this.buttonReload.UseVisualStyleBackColor = false;
             this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.button2);
+            this.panel3.Controls.Add(this.checkBoxEnd);
+            this.panel3.Controls.Add(this.checkBoxStart);
+            this.panel3.Controls.Add(this.panel36);
+            this.panel3.Controls.Add(this.comboBoxFilter);
+            this.panel3.Controls.Add(this.buttonFilter);
             this.panel3.Controls.Add(this.label30);
-            this.panel3.Location = new System.Drawing.Point(0, 477);
+            this.panel3.Location = new System.Drawing.Point(2, 319);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(422, 48);
+            this.panel3.Size = new System.Drawing.Size(418, 109);
             this.panel3.TabIndex = 61;
             // 
-            // button2
+            // checkBoxEnd
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(312, 15);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 23);
-            this.button2.TabIndex = 49;
-            this.button2.Text = "Сортировать";
-            this.button2.UseVisualStyleBackColor = false;
+            this.checkBoxEnd.AutoSize = true;
+            this.checkBoxEnd.Location = new System.Drawing.Point(90, 83);
+            this.checkBoxEnd.Name = "checkBoxEnd";
+            this.checkBoxEnd.Size = new System.Drawing.Size(71, 19);
+            this.checkBoxEnd.TabIndex = 63;
+            this.checkBoxEnd.Text = "В конце";
+            this.checkBoxEnd.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStart
+            // 
+            this.checkBoxStart.AutoSize = true;
+            this.checkBoxStart.Location = new System.Drawing.Point(6, 83);
+            this.checkBoxStart.Name = "checkBoxStart";
+            this.checkBoxStart.Size = new System.Drawing.Size(78, 19);
+            this.checkBoxStart.TabIndex = 62;
+            this.checkBoxStart.Text = "В начале";
+            this.checkBoxStart.UseVisualStyleBackColor = true;
+            // 
+            // panel36
+            // 
+            this.panel36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel36.Controls.Add(this.textBox18);
+            this.panel36.Location = new System.Drawing.Point(6, 53);
+            this.panel36.Name = "panel36";
+            this.panel36.Size = new System.Drawing.Size(249, 24);
+            this.panel36.TabIndex = 55;
+            // 
+            // textBox18
+            // 
+            this.textBox18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox18.Location = new System.Drawing.Point(4, 5);
+            this.textBox18.Name = "textBox18";
+            this.textBox18.Size = new System.Drawing.Size(243, 14);
+            this.textBox18.TabIndex = 50;
+            // 
+            // comboBoxFilter
+            // 
+            this.comboBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboBoxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBoxFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxFilter.FormattingEnabled = true;
+            this.comboBoxFilter.Location = new System.Drawing.Point(5, 26);
+            this.comboBoxFilter.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.comboBoxFilter.Name = "comboBoxFilter";
+            this.comboBoxFilter.Size = new System.Drawing.Size(250, 23);
+            this.comboBoxFilter.TabIndex = 61;
+            // 
+            // buttonFilter
+            // 
+            this.buttonFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonFilter.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.buttonFilter.FlatAppearance.BorderSize = 0;
+            this.buttonFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonFilter.Location = new System.Drawing.Point(307, 80);
+            this.buttonFilter.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonFilter.Name = "buttonFilter";
+            this.buttonFilter.Size = new System.Drawing.Size(103, 23);
+            this.buttonFilter.TabIndex = 49;
+            this.buttonFilter.Text = "Фильтровать";
+            this.buttonFilter.UseVisualStyleBackColor = false;
+            this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
             // label30
             // 
@@ -633,7 +693,7 @@ namespace TaskBook
             this.label30.BackColor = System.Drawing.Color.White;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label30.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label30.Location = new System.Drawing.Point(3, 3);
+            this.label30.Location = new System.Drawing.Point(3, 6);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(29, 15);
@@ -642,18 +702,17 @@ namespace TaskBook
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.buttonUpdate);
             this.panel1.Controls.Add(this.buttonClearStr);
             this.panel1.Controls.Add(this.buttonAdd);
             this.panel1.Controls.Add(this.buttonDelete);
             this.panel1.Controls.Add(this.buttonSearch);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(0, 526);
+            this.panel1.Location = new System.Drawing.Point(2, 430);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(422, 85);
+            this.panel1.Size = new System.Drawing.Size(418, 85);
             this.panel1.TabIndex = 55;
             // 
             // buttonUpdate
@@ -685,7 +744,7 @@ namespace TaskBook
             this.buttonClearStr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonClearStr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClearStr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonClearStr.Location = new System.Drawing.Point(312, 52);
+            this.buttonClearStr.Location = new System.Drawing.Point(307, 52);
             this.buttonClearStr.Margin = new System.Windows.Forms.Padding(0);
             this.buttonClearStr.Name = "buttonClearStr";
             this.buttonClearStr.Size = new System.Drawing.Size(103, 23);
@@ -704,7 +763,7 @@ namespace TaskBook
             this.buttonAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAdd.Location = new System.Drawing.Point(5, 23);
+            this.buttonAdd.Location = new System.Drawing.Point(6, 23);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(79, 23);
@@ -758,7 +817,7 @@ namespace TaskBook
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Location = new System.Drawing.Point(3, 4);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 15);
@@ -768,7 +827,6 @@ namespace TaskBook
             // panelDefault
             // 
             this.panelDefault.BackColor = System.Drawing.Color.White;
-            this.panelDefault.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelDefault.Controls.Add(this.panelTask);
             this.panelDefault.Controls.Add(this.label2);
             this.panelDefault.Controls.Add(this.panelEmployee_Task);
@@ -777,9 +835,9 @@ namespace TaskBook
             this.panelDefault.Controls.Add(this.panelEmployee);
             this.panelDefault.Controls.Add(this.panelAutorization);
             this.panelDefault.Controls.Add(this.panelTask_Programmer);
-            this.panelDefault.Location = new System.Drawing.Point(0, 52);
+            this.panelDefault.Location = new System.Drawing.Point(2, 54);
             this.panelDefault.Name = "panelDefault";
-            this.panelDefault.Size = new System.Drawing.Size(422, 263);
+            this.panelDefault.Size = new System.Drawing.Size(418, 263);
             this.panelDefault.TabIndex = 48;
             // 
             // panelTask
@@ -1777,7 +1835,7 @@ namespace TaskBook
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 20;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.Size = new System.Drawing.Size(756, 611);
+            this.dataGridView1.Size = new System.Drawing.Size(760, 612);
             this.dataGridView1.TabIndex = 48;
             this.dataGridView1.TabStop = false;
             this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_SelectionChanged);
@@ -1832,6 +1890,8 @@ namespace TaskBook
             this.panel54.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel36.ResumeLayout(false);
+            this.panel36.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelDefault.ResumeLayout(false);
@@ -2086,11 +2146,16 @@ namespace TaskBook
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonFilter;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Panel panel54;
         private System.Windows.Forms.ToolStripButton toolStripButtonSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripLabel5;
         private System.Windows.Forms.Button buttonUpdate;
+        public System.Windows.Forms.ComboBox comboBoxFilter;
+        private System.Windows.Forms.Panel panel36;
+        public System.Windows.Forms.TextBox textBox18;
+        public System.Windows.Forms.CheckBox checkBoxEnd;
+        public System.Windows.Forms.CheckBox checkBoxStart;
     }
 }

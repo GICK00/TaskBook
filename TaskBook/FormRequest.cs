@@ -5,12 +5,13 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using TaskBook.Interaction;
 
 namespace TaskBook
 {
     public partial class FormRequest : MaterialForm
     {
-        private readonly Interaction.Services services = new Interaction.Services();
+        private readonly Services services = new Services();
 
         public FormRequest()
         {
@@ -41,11 +42,11 @@ namespace TaskBook
 
         private void toolStripButtonOpenSQL_Click(object sender, EventArgs e)
         {
-            if (services.openFileDialogSQL.ShowDialog() == DialogResult.Cancel) 
+            if (Services.openFileDialogSQL.ShowDialog() == DialogResult.Cancel)
                 return;
             try
             {
-                string filename = services.openFileDialogSQL.FileName;
+                string filename = Services.openFileDialogSQL.FileName;
                 string sql = System.IO.File.ReadAllText(filename, Encoding.GetEncoding(1251));
                 textBoxSQLReader.Text = sql;
             }

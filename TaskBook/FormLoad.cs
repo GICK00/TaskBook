@@ -54,7 +54,7 @@ namespace TaskBook
                 {
                     try
                     {
-                        using (SqlCommand sqlCommand = new SqlCommand("USE " + FormMain.connection.Database.ToString(), FormMain.connection))
+                        using (SqlCommand sqlCommand = new SqlCommand($"USE {FormMain.connection.Database.ToString()}", FormMain.connection))
                         {
                             FormMain.connection.Open();
                             sqlCommand.ExecuteNonQuery();

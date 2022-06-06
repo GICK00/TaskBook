@@ -4,6 +4,7 @@ using System;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Windows.Forms;
+using TaskBook.Interaction;
 
 namespace TaskBook
 {
@@ -12,9 +13,10 @@ namespace TaskBook
         public static SqlConnection connection;
 
         public static readonly MaterialSkinManager materialSkinManager = MaterialSkinManager.Instance;
-        private readonly Interaction.InteractionData interactionData = new Interaction.InteractionData();
-        private readonly Interaction.InteractionTool interactionTool = new Interaction.InteractionTool();
-        private readonly Interaction.Services services = new Interaction.Services();
+        private readonly InteractionData interactionData = new InteractionData();
+        private readonly InteractionTool interactionTool = new InteractionTool();
+        private readonly Services services = new Services();
+
         private readonly FormRequest formRequest = new FormRequest();
         private readonly FormInfo formInfo = new FormInfo();
         private readonly FormLogin formLogin = new FormLogin();
@@ -28,8 +30,8 @@ namespace TaskBook
 
         public FormMain()
         {
-            InitializeComponent();
             Program.formMain = this;
+            InitializeComponent();
 
             new Thread(() =>
             {
@@ -55,20 +57,19 @@ namespace TaskBook
                     this.label2.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
                     this.label3.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
                     this.label30.Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-
-                    services.saveFileDialogBack.FileName = "TaskBook";
-                    services.saveFileDialogBack.DefaultExt = ".bak";
-                    services.saveFileDialogBack.Filter = "Bak files(*bak)|*bak";
-
-                    services.openFileDialogSQL.Filter = "Sql files(*.sql)|*.sql| Text files(*.txt)|*.txt| All files(*.*)|*.*";
-                    services.openFileDialogRes.Filter = "Bak files(*bak)|*bak";
                 };
-
                 if (InvokeRequired)
                     Invoke(action);
                 else
                     action();
             }).Start();
+
+            Services.saveFileDialogBack.FileName = "TaskBook";
+            Services.saveFileDialogBack.DefaultExt = ".bak";
+            Services.saveFileDialogBack.Filter = "Bak files(*bak)|*bak";
+
+            Services.openFileDialogSQL.Filter = "Sql files(*.sql)|*.sql| Text files(*.txt)|*.txt| All files(*.*)|*.*";
+            Services.openFileDialogRes.Filter = "Bak files(*bak)|*bak";
 
             services.UpdateApp();
             services.Visibl();
@@ -94,6 +95,7 @@ namespace TaskBook
 
             services.ClearStr();
             services.Reload(comboBox.Text);
+            services.comboBoxFilter(comboBox.Text);
             services.Visibl();
         }
 
@@ -202,8 +204,8 @@ namespace TaskBook
             services.Visibl();
             dataGridView1.Enabled = true;
             services.Reload(comboBox.Text);
-            toolStripStatusLabel2.Text = "Выполнен вход под логином " + FormLogin.Login;
-            this.Text = "Учёт задач штатного программиста - " + FormLogin.Login;
+            toolStripStatusLabel2.Text = $"Выполнен вход под логином {FormLogin.Login}";
+            this.Text = $"Учёт задач штатного программиста - {FormLogin.Login}";
             materialSkinManager.AddFormToManage(this);
         }
 
@@ -215,6 +217,7 @@ namespace TaskBook
                 this.Text = "Учёт задач штатного программиста";
                 materialSkinManager.AddFormToManage(this);
                 comboBox.DataSource = null;
+                comboBoxFilter.DataSource = null;
                 services.Visibl();
                 dataGridView1.DataSource = null;
                 flagUpdate = false;
@@ -234,7 +237,7 @@ namespace TaskBook
             dataGridView1.Rows[dataGridView1.CurrentRow.Index].Selected = true;
             flagUpdate = true;
 
-            toolStripStatusLabel2.Text = "Выбрана строка №" + (dataGridView1.CurrentRow.Index + 1);
+            toolStripStatusLabel2.Text = $"Выбрана строка № {(dataGridView1.CurrentRow.Index + 1)}";
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -244,6 +247,8 @@ namespace TaskBook
         }
 
         public void buttonClearStr_Click(object sender, EventArgs e) => services.ClearStr();
+
+        private void buttonFilter_Click(object sender, EventArgs e) => services.Filter(comboBox.Text, comboBoxFilter.Text);
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {

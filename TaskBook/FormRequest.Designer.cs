@@ -52,7 +52,7 @@ namespace TaskBook
             this.buttonOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonOk.Location = new System.Drawing.Point(753, 440);
+            this.buttonOk.Location = new System.Drawing.Point(752, 438);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(80, 23);
             this.buttonOk.TabIndex = 0;
@@ -67,11 +67,11 @@ namespace TaskBook
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSQLReader.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxSQLReader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSQLReader.Location = new System.Drawing.Point(2, 88);
+            this.textBoxSQLReader.Location = new System.Drawing.Point(4, 88);
             this.textBoxSQLReader.Multiline = true;
             this.textBoxSQLReader.Name = "textBoxSQLReader";
             this.textBoxSQLReader.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxSQLReader.Size = new System.Drawing.Size(833, 347);
+            this.textBoxSQLReader.Size = new System.Drawing.Size(830, 344);
             this.textBoxSQLReader.TabIndex = 1;
             // 
             // buttonExit
@@ -84,7 +84,7 @@ namespace TaskBook
             this.buttonExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonExit.Location = new System.Drawing.Point(674, 440);
+            this.buttonExit.Location = new System.Drawing.Point(673, 438);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(73, 23);
             this.buttonExit.TabIndex = 2;
@@ -122,14 +122,17 @@ namespace TaskBook
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.statusStrip1.AutoSize = false;
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 466);
+            this.statusStrip1.Location = new System.Drawing.Point(2, 464);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(837, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(833, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";

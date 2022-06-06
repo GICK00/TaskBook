@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace TaskBook.Interaction
@@ -10,12 +11,12 @@ namespace TaskBook.Interaction
         // Очищает все таблицы БД от данных кроме таблицы Autorization (она необходима для авторизации в приложении). 
         public void очиститьБазуДанныхToolStripMenuItem()
         {
-            if (services.Test() != true) 
+            if (services.Test() != true)
                 return;
-            if (services.LoginAdmin() != true) 
+            if (services.LoginAdmin() != true)
                 return;
             DialogResult result = MessageBox.Show("Вы уверены, что хотите очистить базу данных?", "Удаление данных.", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) 
+            if (result != DialogResult.Yes)
                 return;
             using (SqlCommand sqlCommand = new SqlCommand("DeletedAll", FormMain.connection))
             {
@@ -31,34 +32,43 @@ namespace TaskBook.Interaction
         // Создает полную резерную копию всей БД.
         public void создатьРезервнуюКопиюToolStripMenuItem()
         {
-            if (services.Test() != true) 
+            if (services.Test() != true)
                 return;
-            if (services.LoginAdmin() != true) 
+            if (services.LoginAdmin() != true)
                 return;
-            if (services.saveFileDialogBack.ShowDialog() == DialogResult.Cancel) 
+            if (Services.saveFileDialogBack.ShowDialog() == DialogResult.Cancel)
                 return;
-            string path = services.saveFileDialogBack.FileName;
-            string sql = @"BACKUP DATABASE[Travel_Company] TO DISK = N'" + path + "' WITH NOFORMAT, NOINIT, NAME = N'Travel_Company-Полная База данных Резервное копирование', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
-            string res = "back";
-            FormLoad formLoad = new FormLoad(sql, res);
+
+            if (services.GetBDSettings() == null)
+                return;
+            List<string> settings = services.GetBDSettings();
+
+            string path = Services.saveFileDialogBack.FileName;
+            string sql = $@"BACKUP DATABASE[{settings[1]}] TO DISK = N'{path}' WITH NOFORMAT, NOINIT, NAME = N'{settings[1]}-Полная База данных Резервное копирование', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
+            FormLoad formLoad = new FormLoad(sql, "back");
             formLoad.ShowDialog();
         }
 
         // Восстанавливает БД из выбранной резервной копии.
         public void восстановитьБазуДанныхToolStripMenuItem()
         {
-            if (services.Test() != true) 
+            if (services.Test() != true)
                 return;
-            if (services.LoginAdmin() != true) 
+            if (services.LoginAdmin() != true)
                 return;
             DialogResult result = MessageBox.Show("Вы уверены, что хотите востановить базу данных?", "Восстановление базы данных.", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) return;
+            if (result != DialogResult.Yes)
+                return;
+            if (Services.openFileDialogRes.ShowDialog() == DialogResult.Cancel)
+                return;
 
-            if (services.openFileDialogRes.ShowDialog() == DialogResult.Cancel) return;
-            string path = services.openFileDialogRes.FileName;
-            string sql = @"USE Master RESTORE DATABASE [Travel_Company] FROM  DISK = N'" + path + "' WITH REPLACE, FILE = 1,  NOUNLOAD,  STATS = 5";
-            string res = "res";
-            FormLoad formLoad = new FormLoad(sql, res);
+            if (services.GetBDSettings() == null)
+                return;
+            List<string> settings = services.GetBDSettings();
+
+            string path = Services.openFileDialogRes.FileName;
+            string sql = $@"USE master RESTORE DATABASE [{settings[1]}] FROM  DISK = N'{path}' WITH REPLACE, FILE = 1,  NOUNLOAD,  STATS = 5";
+            FormLoad formLoad = new FormLoad(sql, "res");
             formLoad.ShowDialog();
         }
     }

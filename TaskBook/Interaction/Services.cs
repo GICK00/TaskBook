@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows.Forms;
@@ -16,10 +17,10 @@ namespace TaskBook.Interaction
         public string connSrring;
 
         private readonly WebClient client = new WebClient();
-              
-        public SaveFileDialog saveFileDialogBack = new SaveFileDialog();
-        public OpenFileDialog openFileDialogSQL = new OpenFileDialog();
-        public OpenFileDialog openFileDialogRes = new OpenFileDialog();
+
+        public static SaveFileDialog saveFileDialogBack = new SaveFileDialog();
+        public static OpenFileDialog openFileDialogSQL = new OpenFileDialog();
+        public static OpenFileDialog openFileDialogRes = new OpenFileDialog();
 
         // Получения списка всех таблиц в БД.
         // Удаление из этого списка системной диаграммы и таблицы Autorization,
@@ -50,6 +51,7 @@ namespace TaskBook.Interaction
                     }
                     FormMain.connection.Close();
                 }
+                comboBoxFilter(Program.formMain.comboBox.Text);
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace TaskBook.Interaction
                     Program.formMain.panelAutorization.Visible = true;
                     break;
             }
-            Program.formMain.toolStripStatusLabel2.Text = "Выбрана таблица " + Program.formMain.comboBox.Text;
+            Program.formMain.toolStripStatusLabel2.Text = $"Выбрана таблица {Program.formMain.comboBox.Text}";
         }
 
         // Вызов панели загрузки (просто упращение кода).
@@ -150,7 +152,7 @@ namespace TaskBook.Interaction
         // Вызов обновляет данные в dataGridView1 и сбрасывает выделенную строку.
         public void Reload(string comboBox)
         {
-            string sql = "SELECT * FROM " + comboBox;
+            string sql = $"SELECT * FROM {comboBox}";
             using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
             {
                 FormMain.connection.Open();
@@ -172,7 +174,7 @@ namespace TaskBook.Interaction
         // в который записывается стандартный тип записи данного файла конфигурации.
         public bool CheckConfig(string arg1, string arg2, string arg3, string arg4)
         {
-            path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location).ToString() + "\\config.ini";
+            path = $"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\config.ini";
             if (File.Exists(path) != true)
             {
                 MessageBox.Show("Файл конфигурации отсуствует! Будет создан новый файл шаблон в корне программы.", "Критическая ошибка конфигурации", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -195,6 +197,31 @@ namespace TaskBook.Interaction
             }
         }
 
+        // Возвращает списко настроек подключения к БД прописанных в config.ini.
+        public List<string> GetBDSettings()
+        {
+            try
+            {
+                if (CheckConfig(null, null, null, null) != true)
+                    return null;
+                path = $"{Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)}\\config.ini";
+                streamReader = new StreamReader(path);
+
+                var settings = new List<string>();
+                while (!streamReader.EndOfStream)
+                {
+                    string line = streamReader.ReadLine().Replace(";", null).Split(' ').Last();
+                    settings.Add(line);
+                }
+                return settings;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
         // Выполняет загрузку текстового файла Var.txt находящегося на GitHub.
         // Выводит соответсвующте уведомления пользователю.
         public void UpdateApp()
@@ -204,12 +231,12 @@ namespace TaskBook.Interaction
                 Uri uri = new Uri("https://github.com/GICK00/TaskBook/blob/main/Ver.txt");
                 if (client.DownloadString(uri).Contains(FormMain.ver))
                 {
-                    Program.formMain.toolStripStatusLabel2.Text = "Устновленна послденяя версия приложения " + FormMain.ver;
+                    Program.formMain.toolStripStatusLabel2.Text = $"Устновленна послденяя версия приложения {FormMain.ver}";
                     return;
                 }
                 else
                 {
-                    string text = "Доступна новая версия приложения.\r\nВаша текущая версия." + FormMain.ver + "\r\nОбновить программу?";
+                    string text = $"Доступна новая версия приложения.\r\nВаша текущая версия {FormMain.ver}. \r\nОбновить программу?";
                     DialogResult dialogResult = MessageBox.Show(text, "Достуно новое обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dialogResult == DialogResult.Yes)
                     {
@@ -255,8 +282,8 @@ namespace TaskBook.Interaction
                 case "Task":
                     Program.formMain.textBox15.Text = array[1];
                     Program.formMain.textBox14.Text = array[2];
-                    Program.formMain.Text = array[3];
-                    Program.formMain.Text = array[4];
+                    Program.formMain.textBox12.Text = array[3];
+                    Program.formMain.textBox17.Text = array[4];
                     Program.formMain.textBox16.Text = array[5];
                     break;
                 case "Departament":
@@ -280,6 +307,69 @@ namespace TaskBook.Interaction
             }
         }
 
+        // Выводит название всех столбцов выбранной таблицы в comboBox.
+        public void comboBoxFilter(string comboBox)
+        {
+            string sql = $"SELECT name FROM sys.columns WHERE object_id = OBJECT_ID('{comboBox}')";
+            using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
+            {
+                FormMain.connection.Open();
+                using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(dataReader);
+                    List<string> names = new List<string>();
+                    foreach (DataRow row in dataTable.Rows)
+                        names.Add(row["name"].ToString());
+                    Program.formMain.comboBoxFilter.DataSource = names;
+                    dataReader.Close();
+                }
+                FormMain.connection.Close();
+            }
+        }
+
+        // Выполняет фильтрацию по выбранному столбцу с вписанным текстом.
+        // Если в пользовател не указал слово для фильтрации то выводятся все записи.
+        public void Filter(string comboBox, string comboBoxFilter)
+        {
+            try
+            {
+                if (Test() != true)
+                    return;
+                if (LoginGuest() != true)
+                    return;
+                string start = null;
+                string end = null;
+                if (Program.formMain.checkBoxStart.Checked == true)
+                    start = "%";
+                if (Program.formMain.checkBoxEnd.Checked == true)
+                    end = "%";
+                string sql = $"SELECT * FROM {comboBox} WHERE {comboBoxFilter} LIKE'{end}{Program.formMain.textBox18.Text}{start}'";
+                using (SqlCommand sqlCommand = new SqlCommand(sql, FormMain.connection))
+                {
+                    FormMain.connection.Open();
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
+                    {
+                        DataTable dataTable = new DataTable();
+                        dataTable.Load(dataReader);
+                        Program.formMain.dataGridView1.DataSource = dataTable;
+                        dataReader.Close();
+                    }
+                    Program.formMain.toolStripStatusLabel2.Text = "Фильтрация выполнена";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Program.formMain.toolStripStatusLabel2.Text = $"Ошибка! {ex.Message}";
+            }
+            finally
+            {
+                FormMain.connection.Close();
+            }
+        }
+
         // Очищяает все TextBox начиная с panelDefault и все включенные в нее Controls.
         public void ClearStr()
         {
@@ -292,6 +382,7 @@ namespace TaskBook.Interaction
                                 if (panTextBox is TextBox) (panTextBox as TextBox).Clear();
                         }
                         else if (panData is ComboBox) (panData as ComboBox).Text = null;
+            Program.formMain.textBox18.Text = null;
         }
     }
 }

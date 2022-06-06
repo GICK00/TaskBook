@@ -29,7 +29,7 @@ namespace TaskBook
                     foreach (var label in this.Controls)
                         if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                     foreach (var panel in this.Controls)
-                        if (panel is Panel) 
+                        if (panel is Panel)
                             foreach (var label in (panel as Panel).Controls)
                                 if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                     foreach (var button in this.Controls)
@@ -45,8 +45,7 @@ namespace TaskBook
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            textBox1.Clear();
-            textBox2.Clear();
+           
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -61,7 +60,7 @@ namespace TaskBook
                 if (textBox1.Text != "" && textBox2.Text != "")
                 {
                     Login = null;
-                    string sql = "SELECT POSITION FROM [Autorization] WHERE LOGIN = '" + textBox1.Text + "' AND PASSWORD = '" + textBox2.Text + "'";
+                    string sql = $"SELECT POSITION FROM [Autorization] WHERE LOGIN = '{textBox1.Text}' AND PASSWORD = '{textBox2.Text}'";
                     Autorization(sql);
                     if (Login != null)
                     {
@@ -73,6 +72,8 @@ namespace TaskBook
                         Program.formMain.toolStripStatusLabel2.Text = "Произведен вход под логином " + textBox1.Text;
                         Program.formMain.Text = "Учёт задач штатного программиста - " + textBox1.Text;
                         FormMain.materialSkinManager.AddFormToManage(this);
+                        textBox1.Clear();
+                        textBox2.Clear();
                         this.Close();
                     }
                     else

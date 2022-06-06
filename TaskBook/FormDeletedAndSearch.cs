@@ -1,8 +1,6 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -31,7 +29,7 @@ namespace TaskBook
                     foreach (var label in this.Controls)
                         if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                     foreach (var panel in this.Controls)
-                        if (panel is Panel) 
+                        if (panel is Panel)
                             foreach (var label in (panel as Panel).Controls)
                                 if (label is Label) (label as Label).Font = new System.Drawing.Font(Program.RobotoRegular, 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
                     foreach (var button in this.Controls)
@@ -74,7 +72,9 @@ namespace TaskBook
             switch (type)
             {
                 case "del":
-                    interactionData.Deleted(this, textBox1);
+                    DialogResult result = MessageBox.Show("Вы уверенны что хотите удалить строку данных?", "Подтверждение удаления", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.No)
+                        interactionData.Deleted(this, textBox1);
                     break;
                 case "sea":
                     Search();
