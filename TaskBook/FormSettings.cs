@@ -56,7 +56,7 @@ namespace TaskBook
         {
             if (services.CheckConfig(textBox1.Text.Trim(), textBox4.Text.Trim(), textBox5.Text.Trim(), textBox6.Text.Trim()) != true)
                 return;
-            File.WriteAllText(Interaction.Services.path, $"Data Source = {textBox1.Text};\r\nInitial Catalog = {textBox4.Text};\r\nIntegrated Security = {textBox5.Text};\r\nConnect Timeout = {textBox6.Text};");
+            File.WriteAllText(Interaction.Services.path, $"Data Source = {textBox1.Text.Trim()};\r\nInitial Catalog = {textBox4.Text.Trim()};\r\nIntegrated Security = {textBox5.Text.Trim()};\r\nConnect Timeout = {textBox6.Text.Trim()};");
             DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("Параметры успешно сохранены.", "Настройки", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (dialogResult == DialogResult.OK)
                 this.Close();
